@@ -37,7 +37,7 @@ public class LoginController {
         if(bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-        Member member = loginService.login(form.getLoginId(), form.getPassword());
+        Member member = loginService.login(form.getLoginId(), form.getPassword()); //아이디 비밀번호 맞는지 확인
 
         if(member == null) {
             //전체 오류
