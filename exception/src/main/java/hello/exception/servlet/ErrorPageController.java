@@ -40,7 +40,7 @@ public class ErrorPageController {
         return "error-page/500";
     }
 
-    @RequestMapping(value = "/error-page/500", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/error-page/500", produces = MediaType.APPLICATION_JSON_VALUE) //json 으로 응답 보내기 위한 코드 추가
     public ResponseEntity<Map<String, Object>> errorPage500Api(HttpServletRequest request, HttpServletResponse response) {
         log.info("API errorPage 500");
         Map<String, Object> result;
