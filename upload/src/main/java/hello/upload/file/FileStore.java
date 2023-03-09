@@ -18,10 +18,9 @@ public class FileStore {
     @Value("${file.dir}")
     private String fileDir;
 
-    public String getFullPath(String filename) {
-        return fileDir + filename;
-    }
-
+    /**
+     * 개별 파일 저장
+     */
     public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
@@ -34,8 +33,10 @@ public class FileStore {
         return new UploadFile(originalFilename, storeFileName);
     }
 
+    /**
+     * 여러 파일 저장
+     */
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
-        log.info("multipartFiles 크기={}", multipartFiles.size());
         List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if(!multipartFile.isEmpty()) {
@@ -46,12 +47,25 @@ public class FileStore {
         return storeFileResult;
     }
 
+    /**
+     * ex) C:/Users/(storeFileName).jpg 반환
+     */
+    public String getFullPath(String filename) {
+        return fileDir + filename;
+    }
 
+    /**
+     * 이름 중복을 피하기 위해 UUID.(파일타입) 로 storeFileName 생성
+     */
     private String createStoreFileName(String originalFilename) {
         String uuid = UUID.randomUUID().toString();
         String storeFileName = uuid + "." + extractExt(originalFilename); //qweqwewqe.png
         return storeFileName;
     }
+
+    /**
+     * 파일 타입 추출 메서드
+     */
 
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");

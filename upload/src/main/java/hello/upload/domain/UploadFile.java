@@ -2,6 +2,9 @@ package hello.upload.domain;
 
 import lombok.Data;
 
+/**
+ * DB 용 객체
+ */
 @Data
 public class UploadFile {
 
