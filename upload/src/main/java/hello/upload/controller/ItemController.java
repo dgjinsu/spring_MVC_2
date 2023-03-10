@@ -41,7 +41,6 @@ public class ItemController {
 
         List<MultipartFile> imageFiles = form.getImageFiles();
         List<UploadFile> uploadFiles = fileStore.storeFiles(imageFiles);
-        log.info("imageFiles 크기={}", imageFiles.size());
 
         //데이터 베이스에 저장 (경로만 저장)   //aws 를 쓰면 s3에 저장
         Item item = new Item();
